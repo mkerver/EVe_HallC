@@ -24,7 +24,18 @@ ScintPlane::ScintPlane(char* SplaneName, GetVariables* DB, CStransform *trans)
     cst = trans;
 
     // Get Values used in construct n paddles for a single ScintPlane
-    int numPMT = DB->GetInt("Number of paddle PMTs =");
+    numPMT = DB->GetInt("Number of paddle PMTs =");
+ PMTdirection=0;    
+std::string stringName(splaneName);
+std::cout<<stringName;
+for(int i=0;i<5;i++){
+if(stringName.compare(Form("Cal%dx",i))==0){
+  numPMT=1;
+  PMTdirection=i;
+  break;
+  }
+}
+
 
     N = DB-> GetInt(Form("%s.PN =",splaneName));
 
@@ -54,7 +65,7 @@ ScintPlane::ScintPlane(char* SplaneName, GetVariables* DB, CStransform *trans)
     sb = CH;
 
     for (int i=0; i<N ; i++) {
-        paddle[i]=new ScintillatorPaddle(i, sx0, sy0, sa ,sb ,cx0,cy0-i*CH, numPMT, PMTl,angle);
+        paddle[i]=new ScintillatorPaddle(i, sx0, sy0, sa ,sb ,cx0,cy0-i*CH, numPMT , PMTl,angle,PMTdirection);
     }
     title = new TLatex(sx0-0.1*sa, sy0-9.5*sb, splaneName);
     title->SetTextSize(0.03);
@@ -138,17 +149,24 @@ void ScintPlane::Track(double x, double y, int i)
 
 void ScintPlane::SPHit(int NumL, int NumR, double poshit[], double neghit[])
 {
+
+if(PMTdirection%2!=0){
     for (int rh=0; rh<NumL; rh++) {
         paddleRightHit(poshit[rh]-1);
     }
-
+}
+if(PMTdirection%2==0){
     for (int lh=0; lh<NumR; lh++) {
         paddleLeftHit(neghit[lh]-1);
     }
+}
 
+if(numPMT==2)
+{
     for (int rh=0; rh<NumR; rh++) {
         for (int lh=0; lh<NumL; lh++) {
             if(poshit[lh]==neghit[rh]) paddleBothHit(poshit[lh]-1);
         }
     }
+}
 }

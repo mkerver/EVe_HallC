@@ -28,11 +28,17 @@ public:
     ScintillatorPaddle3D(char* PlaneName,int index,int n,
                          double length, double height ,double thickness ,
                          TGeoVolume *paddle, int numPMT );
+ScintillatorPaddle3D(char* PlaneName,int index,int n,
+                         double length, double height ,double thickness ,
+                         TGeoVolume *paddle, int numPMT, int PMTdirection );
     virtual ~ScintillatorPaddle3D();
     void HitL();
     void HitR();
     void HitPaddle();
     void clear();
+   bool odd;
+   bool even;
+
 
 protected:
 

@@ -118,7 +118,7 @@ void Trajectory3D::Enable(int n, double x, double y, double theta, double phi)
     double B1y = C1y + (C2y-C1y)/(C2x-C1x)*(xmin-C1x);
     double B1z = C1z + (C2z-C1z)/(C2x-C1x)*(xmin-C1x);
 
-    double xmax =390.0;   // FIXME: where does this number come from?
+    double xmax =590.0;   // FIXME: where does this number come from?
     double B2x = xmax;
     double B2y = C2y + (C2y-C1y)/(C2x-C1x)*(xmax-C2x);
     double B2z = C2z + (C2z-C1z)/(C2x-C1x)*(xmax-C2x);

@@ -379,24 +379,34 @@ void EVe::CreateWires()
     double Cs2xY = vars -> GetDouble("canvas.s2x.y =");
     double Cs2yX = vars -> GetDouble("canvas.s2y.x =");
     double Cs2yY = vars -> GetDouble("canvas.s2y.y =");
+    double Cs3xX = vars -> GetDouble("canvas.s3x.x =");
+    double Cs3xY = vars -> GetDouble("canvas.s3x.y =");
+    double Cs4xX = vars -> GetDouble("canvas.s4x.x =");
+    double Cs4xY = vars -> GetDouble("canvas.s4x.y =");
 
 
     //ajust scintplane position in 2D canvas
     CStransform *s1x_cst = new CStransform(canvasL, Cs1xX, Cs1xY);
     CStransform *s1y_cst = new CStransform(canvasL, Cs1yX, Cs1yY);
-
-    if (NScintPlanes == 4) {
+    CStransform *s3x_cst = new CStransform(canvasL, Cs3xX, Cs3xY);
+    CStransform *s4x_cst = new CStransform(canvasL, Cs4xX, Cs4xY);
+ 
+  // if (NScintPlanes == 8) {
         s2x_cst = new CStransform(canvasL, Cs2xX, Cs2xY);
         s2y_cst = new CStransform(canvasL, Cs2yX, Cs2yY);
-    }
+	
+    //}
 
     s1X = new ScintPlane((char*)"s1x", vars, s1x_cst);
     s1Y = new ScintPlane((char*)"s1y", vars, s1y_cst);
+    s3X = new ScintPlane((char*)"s3x", vars, s3x_cst);
+    s4X = new ScintPlane((char*)"s4x", vars, s4x_cst);
 
-    if (NScintPlanes == 4) {
+  //  if (NScintPlanes == 8) {
         s2X = new ScintPlane((char*)"s2x", vars, s2x_cst);
         s2Y = new ScintPlane((char*)"s2y", vars, s2y_cst);
-    }
+  //      s3X = new ScintPlane((char*)"s3x", vars, s3x_cst);
+  //  }
 
 
     // In the end we plot a coordinate system
@@ -858,6 +868,8 @@ void EVe::DoDraw(int event)
         s1X->clear();
         s2X->clear();
         s2Y->clear();
+	s3X->clear();
+        s4X->clear();
 
         s1X->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
                      H_hod_1x_postdchits,H_hod_1x_negtdchits);
@@ -867,6 +879,14 @@ void EVe::DoDraw(int event)
                      H_hod_2x_postdchits,H_hod_2x_negtdchits);
         s2Y->SPHit(Ndata_H_hod_2y_postdchits,Ndata_H_hod_2y_negtdchits,
                      H_hod_2y_postdchits,H_hod_2y_negtdchits);
+
+	s3X->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
+                     H_hod_1x_postdchits,H_hod_1x_negtdchits);
+        s4X->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
+                     H_hod_1x_postdchits,H_hod_1x_negtdchits);
+       
+       // Cal3X->SPHit(Ndata_H_hod_2x_postdchits,Ndata_H_hod_2x_negtdchits,
+        //             H_hod_2x_postdchits,H_hod_2x_negtdchits);
 
         //****** Now we draw Trajectories through detectors
 
@@ -984,6 +1004,12 @@ void EVe::DoDraw(int event)
         detector->s1yplane->clear();
         detector->s2xplane->clear();
         detector->s2yplane->clear();
+        detector->s3xplane->clear();
+        detector->s4xplane->clear();
+        for(int i=0;i<4;i++){
+        detector->Cal3xplane[i]->clear();       
+
+       }
 
         detector->s1xplane->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
                                   H_hod_1x_postdchits,H_hod_1x_negtdchits);
@@ -994,12 +1020,21 @@ void EVe::DoDraw(int event)
         detector->s2yplane->SPHit(Ndata_H_hod_2y_postdchits,Ndata_H_hod_2y_negtdchits,
                                   H_hod_2y_postdchits,H_hod_2y_negtdchits);
 
+        detector->s3xplane->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
+                                  H_hod_1x_postdchits,H_hod_1x_negtdchits);
+
+        detector->s4xplane->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
+                                  H_hod_1x_postdchits,H_hod_1x_negtdchits);
+         for(int i=0;i<4;i++){
+         detector->Cal3xplane[i]->SPHit(Ndata_H_hod_1x_postdchits,Ndata_H_hod_1x_negtdchits,
+                                  H_hod_1x_postdchits,H_hod_1x_negtdchits);
+         }
         // Clear tracks
         detector->ClearTracks();
 
         // Now draw tracks through the detector stack
         if (Ndata_H_tr_x>0 && fTextButtonTrack->IsOn()) {
-            for(int i=0; i < std::min((unsigned int)Ndata_H_tr_x, detector->TrackList.size()); i++) {
+            for(int i=0; i < std::min((unsigned int)Ndata_H_tr_x, (unsigned int)(detector->TrackList.size())); i++) {
                 detector->TrackList[i]->
                 Enable(i, H_tr_x[i], H_tr_y[i], H_tr_th[i], H_tr_ph[i]);
             }

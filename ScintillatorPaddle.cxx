@@ -21,7 +21,7 @@ using namespace std;
 void rotranspaddle (double angle, double* xL, double* yL, double* xR, double* yR, double* xscint, double* yscint,double sx0,double sy0);
 void rotransline(double ang, double* x, double* y, double sx0, double sy0,int size);
 
-ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, double b, double cx0,double cy0, int PMTn, double PMTlength, double ang)
+ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, double b, double cx0,double cy0, int PMTn, double PMTlength, double ang, int PMTdirection)
 {
     // In parameter of ScintillatorPaddle:
     // index is the index of the single Paddle in a ScintPlane
@@ -37,7 +37,7 @@ ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, 
     sa = a;
     sb = b;
     // paddle_length = length;
-    n = PMTn;
+    n = PMTn ;
     angle=ang;
 
     cx0=cx0-PMTlength;
@@ -77,7 +77,19 @@ ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, 
 
     rotranspaddle (angle, xl, yl, xr, yr, xs, ys, sx0,sy0);
     rotransline(angle, tx, ty,sx0,sy0,1);
+if(n==1){
+  if(PMTdirection%2!=0){
+  plineR = new TPolyLine(7,xR,yR);
+    plineR->SetFillColor(38);
+    plineR->SetLineColor(1);
+    plineR->SetLineWidth(1);
+    plineR->Draw("f");
+    plineR->Draw();
 
+    even=false;
+    odd=true;
+  }
+  if(PMTdirection%2==0){
     plineL = new TPolyLine(7,xL,yL);
     plineL->SetFillColor(38);
     plineL->SetLineColor(1);
@@ -85,6 +97,15 @@ ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, 
     plineL->Draw("f");
     plineL->Draw();
 
+   even=true;
+   odd=false;
+  }
+
+}
+
+
+    
+if(n==2){
     plineR = new TPolyLine(7,xR,yR);
     plineR->SetFillColor(38);
     plineR->SetLineColor(1);
@@ -92,6 +113,16 @@ ScintillatorPaddle::ScintillatorPaddle(int index, double x, double y, double a, 
     plineR->Draw("f");
     plineR->Draw();
 
+    plineL = new TPolyLine(7,xL,yL);
+    plineL->SetFillColor(38);
+    plineL->SetLineColor(1);
+    plineL->SetLineWidth(1);
+    plineL->Draw("f");
+    plineL->Draw();
+ 
+    odd=true;
+    even=true;
+}
     scint = new TPolyLine(5,xscint,yscint);
     scint->SetFillColor(38);
     scint->SetLineColor(1);
@@ -141,13 +172,17 @@ ScintillatorPaddle::~ScintillatorPaddle()
 }
 
 void ScintillatorPaddle::HitLeft()
-{
+{  
+    if(even==true){
     plineL->SetFillColor(kGreen);
+   }
 }
 
 void ScintillatorPaddle::HitRight()
-{
+{ 
+    if(odd==true){
     plineR->SetFillColor(kGreen);
+   }
 }
 
 void ScintillatorPaddle::HitPaddle()
@@ -157,7 +192,14 @@ void ScintillatorPaddle::HitPaddle()
 
 void ScintillatorPaddle::clear()
 {
-    plineR->SetFillColor(38);
-    plineL->SetFillColor(38);
+
+  if(odd==true){
+     plineR->SetFillColor(38);
+  }
+   if(even==true){
+      plineL->SetFillColor(38);
+  }
+
     scint->SetFillColor(38);
 }
+

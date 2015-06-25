@@ -21,13 +21,15 @@ class ScintillatorPaddle
 {
 
 public:
-    ScintillatorPaddle(int index, double x, double y, double a, double b, double cx0,double cy0, int PMTn, double PMTlength, double ang);
+    ScintillatorPaddle(int index, double x, double y, double a, double b, double cx0,double cy0, int PMTn, double PMTlength, double ang,int PMTdirection);
     virtual ~ScintillatorPaddle();
     void HitLeft();
     void HitRight();
     void HitPaddle();
     void clear();
 
+     bool odd;
+     bool even;
 protected:
     double sx0, sy0, sa, sb, pl;
     double paddle_length;

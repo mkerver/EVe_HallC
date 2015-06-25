@@ -17,6 +17,7 @@
 #include "TGeoManager.h"
 #include "TGeoBBox.h"
 #include "TGeoTrd2.h"
+#include "CalorimeterPlane3D.h"
 #include "TGeoTube.h"
 #include "ScintPlane3D.h"
 #include "TWire3D.h"
@@ -51,6 +52,15 @@ public:
     ScintPlane3D *s1yplane;
     ScintPlane3D *s2xplane;
     ScintPlane3D *s2yplane;
+    ScintPlane3D *s3xplane;
+    ScintPlane3D *s4xplane;
+    ScintPlane3D *Cal1xplane;
+    ScintPlane3D *Cal2xplane;
+    CalorimeterPlane3D *Cal3xplane [4];
+    CalorimeterPlane3D *Cal4xplane [13];
+
+
+    
 
     vector<Trajectory3D* > TrackList;
 

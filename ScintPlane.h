@@ -36,7 +36,8 @@ public:
     void SPHit(int NumL, int NumR, double poshit[], double neghit[]);
     void clear();
 
-
+    int PMTdirection;
+    int numPMT;
 protected:
     int N; // number of paddles
     //int horiz; // 1 if scint plane has horizontally stacked paddles, 0 if vertical

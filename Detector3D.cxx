@@ -1,5 +1,5 @@
 ///////////////////////////////////////
-/*  Detector3D.h  7/17/14
+/*  Detector3D.cxx  7/17/14
 
     Ben Davis-Purcell
 
@@ -108,6 +108,18 @@ Detector3D::Detector3D()
     //s2y Scint Plane
     // changed volume size to 60
     s2yplane = new ScintPlane3D((char*)"s2y", hmsDB, top);
+
+    // s3x - Scintillation Plane
+     s3xplane = new ScintPlane3D((char*)"s3x", hmsDB, top);
+ 
+     s4xplane = new ScintPlane3D((char*)"s4x", hmsDB, top);
+    
+
+//Cal3x array 
+//change name??
+   for(int i=0;i<4;i++){
+   Cal3xplane[i] = new CalorimeterPlane3D((char*)"Cal3x", hmsDB, top,i);
+}
 
     // There will be 10 tracks for any fixed number of tracks in this code,
     // The reason for it is after you call CloseGeometry() function, you
