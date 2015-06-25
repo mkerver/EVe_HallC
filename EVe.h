@@ -88,7 +88,11 @@ private:
     ScintPlane *s1Y;
     ScintPlane *s2X;
     ScintPlane *s2Y;
-
+    ScintPlane *s3X; 
+    ScintPlane *s4X;
+    ScintPlane *Cal1X;
+    ScintPlane *Cal2X;
+    ScintPlane *Cal3X;
     int EventNumber;
     int TotalNumberOfEvents;
 
