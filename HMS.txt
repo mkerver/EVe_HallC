@@ -4,26 +4,40 @@
 Scintillator Paddle Length = 
 ScintYlength = 
 ScintZlength = 
-Number of paddle PMTs = 2
-Number of Scint Planes = 4	
+Number of paddle PMTs = 2 
+Number of Scint Planes = 6	
 
 //Data can be ajusted to change splanes and chambers position in planar view
-canvasL = 5.0
+canvasL = 10.0
 
-canvas.s1x.x = 0.27
+canvas.s1x.x = 0.17
 canvas.s1x.y = 0.475
-canvas.s1y.x = 0.27
+canvas.s1y.x = 0.17
 canvas.s1y.y = 0.8
 
-canvas.s2x.x = 0.7
-canvas.s2x.y = 0.475
-canvas.s2y.x = 0.7
-canvas.s2y.y = 0.8
+canvas.s2x.x = 0.5
+canvas.s2x.y = 0.8
+canvas.s2y.x = 0.5
+canvas.s2y.y = 0.475
 
-canvas.MWDC1.x = 0.27
-canvas.MWDC1.y = 0.18
-canvas.MWDC2.x = 0.7
-canvas.MWDC2.y = 0.18
+canvas.s3x.x = 0.8
+canvas.s3x.y = 0.8
+
+canvas.s4x.x = 0.8
+canvas.s4x.y = 0.475
+
+
+canvas.cal1x.x = 0.9
+canvas.cal1x.y = 0.17
+
+canvas.cal2x.x = 0.6
+canvas.cal2x.y = 0.17
+
+
+canvas.MWDC1.x = 0.1
+canvas.MWDC1.y = 0.17
+canvas.MWDC2.x = 0.35
+canvas.MWDC2.y = 0.17
 
 //Planar view track Calculation data
 MWDC2.z = 0.81222
@@ -203,5 +217,119 @@ s2y.PaddleLength = 120.0
 s2y.PaddleHeight = 7.53
 s2y.PaddleThickness = 1.067
 s2y.tilt = 0.0
+
+
+// Double-ended Calorimeter layer-A Variables
+        //s3x paddles' angle
+s3x.angle = 0.0
+
+        /// number of paddles
+s3x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+s3x.xpos = 395.545
+s3x.ypos = 0.0
+s3x.zpos = 0.0
+s3x.PaddleLength = 120.0
+s3x.PaddleHeight = 7.53
+s3x.PaddleThickness = 20.067
+s3x.tilt = 6.0
+
+// Double-ended Calorimeter layer-B Variables
+        //s4x paddles' angle
+s4x.angle = 0.0
+
+        /// number of paddles
+s4x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+s4x.xpos = 416.545
+s4x.ypos = 0.0
+s4x.zpos = 0.0
+s4x.PaddleLength = 120.0
+s4x.PaddleHeight = 7.53
+s4x.PaddleThickness = 20.067
+s4x.tilt = 6.0
+
+//Front Left  Calorimter Plane for SHMS
+// Cal1x-plane variables
+
+        //Cal13x paddles' angle
+Cal1x.angle = 0.0
+
+        /// number of paddles
+Cal1x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+Cal1x.xpos = 600.545
+Cal1x.ypos = -30.0
+Cal1x.zpos = 0.0
+Cal1x.PaddleLength = 60.0
+Cal1x.PaddleHeight = 7.53
+Cal1x.PaddleThickness = 20.067
+Cal1x.tilt = 0.0
+Cal1x.zrotation = 0.0
+
+
+//Front right calorimeter for SHMS
+// Cal2x-plane variables
+
+        //Cal2x paddles' angle
+Cal2x.angle = 0.0
+
+        /// number of paddles
+Cal2x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+Cal2x.xpos = 600.545
+Cal2x.ypos = 30.0
+Cal2x.zpos = 0.0
+Cal2x.PaddleLength = 60.0
+Cal2x.PaddleHeight = 7.53
+Cal2x.PaddleThickness = 20.067
+Cal2x.tilt = 0.0
+Cal2x.zrotation = 0.0
+
+
+
+//Array of 4 Calorimeter Planes Layers C/D
+// Cal3x-plane variables
+
+        //Cal3x paddles' angle
+Cal3x.angle = 0.0
+
+        /// number of paddles
+Cal3x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+Cal3x.xpos = 435.545
+Cal3x.ypos = -31.0
+Cal3x.zpos = 0.0
+Cal3x.PaddleLength = 60.0
+Cal3x.PaddleHeight = 7.53
+Cal3x.PaddleThickness = 20.067
+Cal3x.tilt = 6.0
+Cal3x.zrotation = 0.0
+
+
+//Array of 13 rotated Calorimeter Planes for SHMS
+// Cal4x-plane variables
+
+         //Cal3x paddles' angle
+Cal4x.angle = 0.0
+
+        /// number of paddles
+Cal4x.PN = 13
+
+/// Position and tilt of the center of the E-plane
+Cal4x.xpos = 650.545
+Cal4x.ypos = -60.0
+Cal4x.zpos = 0.0
+Cal4x.PaddleLength = 60.0
+Cal4x.PaddleHeight = 7.53
+Cal4x.PaddleThickness = 20.067
+Cal4x.tilt = 0.0
+Cal4x.zrotation = 90.0
+
 
 
